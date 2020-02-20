@@ -41,8 +41,6 @@ executors:
         <<: *ruby_envs
       - image: circleci/postgres:<< parameters.postgres_tag >>
         environment:
-          POSTGRES_USER: circleci-demo-ruby-test
-          POSTGRES_DB: rails_blog_test
           POSTGRES_PASSWORD: testtest
 
 commands:
@@ -127,3 +125,4 @@ workflows:
       - test:
           requires:
             - build
+          context: test
