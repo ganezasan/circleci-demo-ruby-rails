@@ -41,8 +41,6 @@ executors:
         <<: *ruby_envs
       - image: circleci/postgres:<< parameters.postgres_tag >>
         environment:
-          POSTGRES_USER: circleci-demo-ruby-test
-          POSTGRES_DB: rails_blog_test
           POSTGRES_PASSWORD: testtest
 
 commands:
@@ -108,16 +106,13 @@ jobs:
           key: rails-demo-bundle
       - ruby/bundle-install
       - yarn-load-cache
-      # Check DB status
       - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
-      # Setup database
+          name: test split with classname type
+          command: circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings --timings-type=classname
       - run:
-          name: Database setup
-          command: bundle exec rails db:schema:load --trace
-      # Run rspec in parallel
-      - ruby/test
+          name: test split with filename type
+          command: circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings --timings-type=filename
+
 
 workflows:
   version: 2
@@ -127,3 +122,4 @@ workflows:
       - test:
           requires:
             - build
+          context: test
