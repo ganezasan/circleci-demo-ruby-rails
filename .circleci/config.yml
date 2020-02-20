@@ -5,7 +5,7 @@ orbs:
 
 references:
   default_ruby_version: &default_ruby_version 2.6.3-stretch-node
-  default_postgress_version: &default_postgress_version "12.2"
+  default_postgress_version: &default_postgress_version "9.6.17"
   ruby_envs: &ruby_envs
     environment:
       BUNDLE_JOBS: 3
@@ -13,13 +13,8 @@ references:
       BUNDLE_PATH: vendor/bundle
       PGHOST: 127.0.0.1
       PGUSER: circleci-demo-ruby-test
-      PGPASSWORD: "tesadasjhdjkashd"
+      PGPASSWORD: dasdadasdsdsdsdsdsdsdsds
       RAILS_ENV: test
-  postgres_envs: &postgres_envs
-    environment:
-      POSTGRES_USER: circleci-demo-ruby-test
-      POSTGRES_DB: rails_blog_test
-      POSTGRES_PASSWORD: "sidiadnnasdadsn"
 
 executors:
   default:
@@ -41,11 +36,17 @@ executors:
         description: "The `circleci/postgres` Docker image version tag."
         type: string
         default: *default_postgress_version
+      postgresDb:
+        type: string
+        default: $POSTGRES_DB
     docker:
       - image: circleci/ruby:<< parameters.ruby_tag >>
         <<: *ruby_envs
-      - image: circleci/postgres:<< parameters.postgres_tag >>
-        <<: *postgres_envs
+      - image: postgres:<< parameters.postgres_tag >>
+        environment:
+          POSTGRES_USER: circleci-demo-ruby-test
+          POSTGRES_PASSWORD: dsadadasdsasdasd
+        command: export POSTGRES_DB=${POSTGRES_DB}
 
 commands:
   yarn-install:
