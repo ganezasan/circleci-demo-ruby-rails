@@ -29,7 +29,6 @@ development:
   database: rails_blog_dev
   username: <%= ENV.fetch("PGUSER") %>
   password: <%= ENV.fetch("PGPASSWORD") %>
-  password: ''
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -65,7 +64,6 @@ test:
   <<: *default
   username: <%= ENV.fetch("PGUSER") %>
   password: <%= ENV.fetch("PGPASSWORD") %>
-  password: 'test'
   database: rails_blog_test
 
 # As with config/secrets.yml, you never want to store sensitive information,

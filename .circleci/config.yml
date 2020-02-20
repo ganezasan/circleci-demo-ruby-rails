@@ -13,7 +13,7 @@ references:
       BUNDLE_PATH: vendor/bundle
       PGHOST: 127.0.0.1
       PGUSER: circleci-demo-ruby-test
-      PGPASSWORD: dasdadasdsdsdsdsdsdsdsds
+      PGPASSWORD: xxxxxxxxxxxxxxxxxx
       RAILS_ENV: test
 
 executors:
@@ -36,17 +36,14 @@ executors:
         description: "The `circleci/postgres` Docker image version tag."
         type: string
         default: *default_postgress_version
-      postgresDb:
-        type: string
-        default: $POSTGRES_DB
     docker:
       - image: circleci/ruby:<< parameters.ruby_tag >>
         <<: *ruby_envs
-      - image: postgres:<< parameters.postgres_tag >>
+      - image: circleci/postgres:<< parameters.postgres_tag >>
         environment:
           POSTGRES_USER: circleci-demo-ruby-test
-          POSTGRES_PASSWORD: dsadadasdsasdasd
-        command: export POSTGRES_DB=${POSTGRES_DB}
+          POSTGRES_DB: rails_blog_test
+          POSTGRES_PASSWORD: testtest
 
 commands:
   yarn-install:
