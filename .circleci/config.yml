@@ -5,21 +5,21 @@ orbs:
 
 references:
   default_ruby_version: &default_ruby_version 2.6.3-stretch-node
-  default_postgress_version: &default_postgress_version 9.5-alpine
+  default_postgress_version: &default_postgress_version "12.2"
   ruby_envs: &ruby_envs
     environment:
       BUNDLE_JOBS: 3
       BUNDLE_RETRY: 3
       BUNDLE_PATH: vendor/bundle
       PGHOST: 127.0.0.1
-      PGUSER: circleci-demo-ruby
-      PGPASSWORD: ""
+      PGUSER: circleci-demo-ruby-test
+      PGPASSWORD: "tesadasjhdjkashd"
       RAILS_ENV: test
   postgres_envs: &postgres_envs
     environment:
-      POSTGRES_USER: circleci-demo-ruby
+      POSTGRES_USER: circleci-demo-ruby-test
       POSTGRES_DB: rails_blog_test
-      POSTGRES_PASSWORD: ""
+      POSTGRES_PASSWORD: "sidiadnnasdadsn"
 
 executors:
   default:
