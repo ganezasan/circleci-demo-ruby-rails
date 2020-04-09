@@ -19,6 +19,11 @@ references:
       POSTGRES_PASSWORD: ""
 
 jobs:
+  hoge:
+    docker:
+      - image: circleci/ruby:2.6.3-stretch-node
+    steps:
+      - checkout
   build:
     docker:
       - *default_docker_ruby_executor
@@ -94,7 +99,8 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
-      - test:
-          requires:
-            - build
+      - hoge
+      # - build
+      # - test:
+      #     requires:
+      #       - build
