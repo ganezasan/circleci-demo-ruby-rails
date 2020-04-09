@@ -99,8 +99,8 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - hoge
-      # - build
-      # - test:
-      #     requires:
-      #       - build
+      # - hoge
+      - build
+      - test:
+          requires:
+            - build
