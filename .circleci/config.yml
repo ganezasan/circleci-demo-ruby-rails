@@ -99,13 +99,9 @@ workflows:
     jobs:
       - build:
           pre-steps:
-            - docker-cpu-profiling/profile:
-                sample_length: 100
-                start_delay: 1
+            - docker-cpu-profiling/profile
       - test:
           requires:
             - build
           pre-steps:
-            - docker-cpu-profiling/profile:
-                sample_length: 100
-                start_delay: 1
+            - docker-cpu-profiling/profile
